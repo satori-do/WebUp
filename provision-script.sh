@@ -1,7 +1,7 @@
 #!/bin/bash
 
-apt-get  update -y
-apt-get -y upgrade
+apt-get update -y
+apt-get upgrade -y
 apt-get install git -y
 apt-get install htop -y
 apt-get install mc -y
@@ -11,13 +11,14 @@ add-apt-repository -y "deb [arch=amd64] https://download.docker.com/linux/ubuntu
 apt-get update
 apt-get install -y docker-ce
 
-sudo groupadd docker
-sudo gpasswd -a $USER docker
-newgrp docker
+#sudo groupadd docker
+sudo gpasswd -a vagrant docker
+echo $USER
+#sudo newgrp docker
 
 docker run hello-world
-apt-get update
-cd /var/www/html
+#apt-get update
+#cd /var/www/html
 
 #if [ ! -e rename.kr.ua ]; then
 #git clone https://github.com/Onix-Systems/rename.kr.ua.git
