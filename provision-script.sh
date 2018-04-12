@@ -26,7 +26,7 @@ sudo gpasswd -a vagrant docker
 #docker run hello-world
 
 docker pull mysql
-docker run --name rename -v /vagrant:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -d mysql:lastest /bin/bash
+docker run --name rename -v /vagrant:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -d mysql:latest /bin/bash
 #apt-get update
 #cd /var/www/html
 
