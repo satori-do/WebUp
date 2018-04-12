@@ -17,8 +17,8 @@ apt-get install -y docker-ce
 
 #sudo groupadd docker
 
-sudo usermod -aG docker your-user
-#sudo gpasswd -a vagrant docker
+#sudo usermod -aG docker your-user
+sudo gpasswd -a vagrant docker
 
 #echo $USER
 #sudo newgrp docker
@@ -26,6 +26,7 @@ sudo usermod -aG docker your-user
 #docker run hello-world
 
 docker pull mysql
+docker run --name rename -v /vagrant:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -d mysql:lastest /bin/bash
 #apt-get update
 #cd /var/www/html
 
