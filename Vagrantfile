@@ -16,8 +16,7 @@ config.vm.box = "ubuntu/xenial64"
 config.vm.network "forwarded_port", guest: 80, host: 8080
 
   # The first argument is the path on the host to the actual folder.
-  #The second argument is
-config.vm.synced_folder "./", "/var/www/html"
+  # config.vm.synced_folder "./", "/var/www/html"
 
 
   # Example for VirtualBox:
