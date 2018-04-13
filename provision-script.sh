@@ -18,6 +18,7 @@ apt-get install -y docker-ce
 #sudo groupadd docker
 
 #sudo usermod -aG docker your-user
+
 sudo gpasswd -a vagrant docker
 
 #echo $USER
@@ -25,7 +26,7 @@ sudo gpasswd -a vagrant docker
 
 #docker run hello-world
 
-docker pull mysql
+#docker pull mysql
 docker run --name rename -v $PWD/mysql:/var/lib/mysql -v /vagrant/rmkr.sql:/docker-entrypoint-initdb.d/rmkr.sql:ro -eMYSQL_DATABASE=rmkr -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.7
 #apt-get update
 #cd /var/www/html
