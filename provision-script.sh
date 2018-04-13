@@ -11,7 +11,8 @@ apt-get install -y \
        mc \
        docker-ce
 
-sudo gpasswd -a vagrant docker
+#sudo gpasswd -a vagrant docker
+sudo usermod -aG docker vagrant
 
 if [ ! -e rename.kr.ua ]; then
 git clone https://github.com/Onix-Systems/rename.kr.ua.git
