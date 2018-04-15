@@ -15,10 +15,13 @@ config.vm.box = "ubuntu/xenial64"
   # Create a forwarded port mapping. -> http://localhost:8080
 config.vm.network "forwarded_port", guest: 80, host: 8080
 
+ # The first argument is the path on the host to the actual folder.The second argument is
+ # config.vm.synced_folder "./", "/home/vagrant"
+
   # Example for VirtualBox:
 config.vm.provider "virtualbox" do |v|
-v.memory = 2048
-v.cpus = 2
+v.memory = 1024
+v.cpus = 1
 
 end
 
