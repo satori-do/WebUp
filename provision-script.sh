@@ -22,6 +22,7 @@ git pull
 fi
 
 cp -a /vagrant/*  /home/vagrant/rename.kr.ua/
+cd rename.kr.ua/
 
 docker pull mysql:5.7
 docker pull php:7.0-apache
