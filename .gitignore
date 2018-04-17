@@ -1,3 +1,5 @@
 .vagrant
 *.log
 *.sql
+*.php
+mysql-root
