@@ -4,7 +4,13 @@ RUN a2enmod rewrite
 
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
-RUN apt-get -y update && apt-get install -y --no-install-recommends curl git unzip vim wget
+RUN apt-get -y update && \
+    apt-get install -y \
+      curl \
+      git \
+      unzip \
+      wget \
+    && docker-php-ext-install pdo_mysql
 
 RUN curl -sS https://getcomposer.org/installer | \
     php -- --install-dir=/usr/bin/ --filename=composer
