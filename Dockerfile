@@ -6,7 +6,10 @@ ENV COMPOSER_ALLOW_SUPERUSER 1
 
 RUN apt-get update && \
     apt-get install -y \
+      curl \
       git \
+      php-cli \
+      php-mbstring \
       unzip
 
 RUN curl -sS https://getcomposer.org/installer | \
