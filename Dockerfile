@@ -5,7 +5,7 @@ RUN a2enmod rewrite
 ENV COMPOSER_ALLOW_SUPERUSER=1 \
     MYSQL_HOSTNAME=localhost \
     MYSQL_USER=user \
-    MYSQL_ROOT_PASSWORD=123456 \
+    MYSQL_PASSWORD=123456 \
     MYSQL_DATABASE=rename \
     CONFIG_FILE=/var/www/html/config/config.php
 
@@ -26,4 +26,4 @@ RUN composer install
 
 COPY cont-conf.sh /cont-conf.sh
 RUN chmod +x /cont-conf.sh
-CMD ["/bin/bash", "cont-conf.sh"]
+CMD /cont-conf.sh && apache2-foreground
