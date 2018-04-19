@@ -4,15 +4,21 @@ A task for familiarizing you with development tools for deploying a web server
 
 Requirements
 Oracle VirtulBox https://www.virtualbox.org
+
 Hashicorp Vagrant https://www.vagrantup.com/
+
 Git https://git-scm.com/
 
 The resources that were used in the development:
 
 https://www.vagrantup.com/ - official site Vagrant
+
 https://hub.docker.com/_/mysql/ - official repository MYSQL
+
 https://hub.docker.com/_/php/ - official reopsitory PHP
+
 https://getcomposer.org/ - official documentations Composer for PHP
+
 https://docs.docker.com/ - official documentations for Docker
 
 Usage
