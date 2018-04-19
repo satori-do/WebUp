@@ -18,7 +18,9 @@ https://docs.docker.com/ - official documentations for Docker
 Development environment use current folder as source for application.
 
 To launch development environment use next command:
+
 `$ vagrant up`
+
 After launching virtual machine demo application will be accessible by url: http://localhost:8080
 
 
