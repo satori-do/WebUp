@@ -1,6 +1,7 @@
 #!/bin/bash
 
 set -e
+
 cp ${CONFIG_FILE}.example ${CONFIG_FILE}
 
 sed -i "s/'server' => 'localhost'/'server' => '${MYSQL_HOSTNAME}'/" ${CONFIG_FILE}
