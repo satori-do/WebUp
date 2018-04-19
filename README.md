@@ -24,20 +24,18 @@ Development environment use current folder as source for application.
     .
     ├── cont-conf.sh
     ├── Dockerfile
-    ├── mysql-root
+    ├── credential          *
     ├── provision-script.sh
-    ├── README.md
-    ├── rmkr.sql
-    ├── ubuntu-xenial-16.04-cloudimg-console.log
+    ├── rmkr.sql            **
     └── Vagrantfile
 
 ```
+`* credential` - contains user data and is filled by request...
+
+`** table data` - supplied separately
+
 To launch development environment use next command:
 
 `$ vagrant up`
 
 After launching virtual machine demo application will be accessible by url: http://localhost:8080
-
-  `* mysql-root` - contains user data and is filled by request...
-
-`* * table data` - supplied separately
