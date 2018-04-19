@@ -2,4 +2,4 @@
 *.log
 *.sql
 *.php
-mysql-root
+credential
