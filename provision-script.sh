@@ -1,8 +1,10 @@
 #!/bin/bash
 
-apt-get install -y apt-transport-https ca-certificates curl software-properties-common
+apt-get install -y apt-transport-https ca-certificates
+curl software-properties-common
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
-add-apt-repository -y "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+add-apt-repository -y \
+"deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
 apt-get update -y
 apt-get upgrade -y
 apt-get install -y \
@@ -31,5 +33,9 @@ cd /home/vagrant/rename.kr.ua/
 
 docker build -t phpach .
 
-docker run --name rename-db -v /var/lib/mysql:/var/lib/mysql -v /vagrant/rmkr.sql:/docker-entrypoint-initdb.d/rmkr.sql:ro --env-file /vagrant/credential -e MYSQL_RANDOM_ROOT_PASSWORD=yes -d mysql:5.7
-docker run -p 80:80 --name rename.kr.ua --link rename-db:db --env-file /vagrant/credential -d phpach:latest
+docker run --name rename-db -v /var/lib/mysql:/var/lib/mysql \
+-v /vagrant/rmkr.sql:/docker-entrypoint-initdb.d/rmkr.sql:ro \
+--env-file /vagrant/credential -e MYSQL_RANDOM_ROOT_PASSWORD=yes -d mysql:5.7
+
+docker run --name rename.kr.ua -p 80:80 --link rename-db:db \
+--env-file /vagrant/credential -d phpach:latest
