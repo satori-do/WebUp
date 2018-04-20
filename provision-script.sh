@@ -24,7 +24,7 @@ git pull
 fi
 
 cp /vagrant/Dockerfile  /home/vagrant/rename.kr.ua/
-cp /vagrant/cont-conf.sh  /home/vagrant/rename.kr.ua/
+cp /vagrant/container-configurator.sh  /home/vagrant/rename.kr.ua/
 
 docker pull mysql:5.7
 docker pull php:7.0-apache
