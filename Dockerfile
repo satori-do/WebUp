@@ -1,6 +1,6 @@
 FROM php:7.0-apache
 
-RUN a2enmod rewrite
+LABEL maintainer="devops@onix-systems.com"
 
 ENV COMPOSER_ALLOW_SUPERUSER=1 \
     MYSQL_HOSTNAME=localhost \
@@ -14,11 +14,10 @@ RUN apt-get -y update && \
       curl \
       git \
       unzip \
-      wget \
-    && docker-php-ext-install pdo_mysql
-
-RUN curl -sS https://getcomposer.org/installer | \
-    php -- --install-dir=/usr/bin/ --filename=composer
+      wget && \
+    docker-php-ext-install pdo_mysql && \
+    a2enmod rewrite && \
+    curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ --filename=composer
 
 COPY . ./
 
