@@ -31,6 +31,8 @@ docker pull php:7.0-apache
 
 cd /home/vagrant/rename.kr.ua/
 
+docker rm $(docker ps -a -q) -f
+
 docker build -t phpach .
 
 docker run --name rename-db -v /var/lib/mysql:/var/lib/mysql \
