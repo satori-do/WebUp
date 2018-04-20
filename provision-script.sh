@@ -43,3 +43,7 @@ docker run --name rename.kr.ua -p 80:80 --link rename-db:db \
            --env-file /vagrant/credential \
            --restart always \
            -d phpach:latest
+
+docker restart rename-db
+
+docker restart rename.kr.ua
