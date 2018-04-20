@@ -31,7 +31,8 @@ docker pull php:7.0-apache
 
 cd /home/vagrant/rename.kr.ua/
 
-docker rm $(docker ps -a -q) -f
+docker rm -f rename-db rename.kr.ua
+
 
 docker build -t phpach .
 
@@ -41,10 +42,9 @@ docker run --name rename-db -v /var/lib/mysql:/var/lib/mysql \
            --restart always \
            -d mysql:5.7
 
-docker run --name rename.kr.ua -p 80:80 --link rename-db:db \
-           --env-file /vagrant/credential \
-           --restart always \
-           -d phpach:latest
+docker run -d --restart always --name rename.kr.ua -p 80:80 \
+           --link rename-db:db --env-file /vagrant/credential \
+           phpach:latest
 
 docker restart rename-db
 
