@@ -36,10 +36,10 @@ docker build -t phpach .
 docker run --name rename-db -v /var/lib/mysql:/var/lib/mysql \
            -v /vagrant/rmkr.sql:/docker-entrypoint-initdb.d/rmkr.sql:ro \
            --env-file /vagrant/credential -e MYSQL_RANDOM_ROOT_PASSWORD=yes \
-           --restart=unless-stopped \
+           --restart=always \
            -d mysql:5.7
 
 docker run --name rename.kr.ua -p 80:80 --link rename-db:db \
            --env-file /vagrant/credential \
-           --restart=unless-stopped \
+           --restart=always \
            -d phpach:latest
