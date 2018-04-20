@@ -17,10 +17,10 @@ apt-get install -y \
 sudo usermod -aG docker vagrant
 
 if [ ! -e rename.kr.ua ]; then
-git clone https://github.com/Onix-Systems/rename.kr.ua.git
+    git clone https://github.com/Onix-Systems/rename.kr.ua.git
 else
-cd /home/vagrant/rename.kr.ua/
-git pull
+    cd /home/vagrant/rename.kr.ua/
+    git pull
 fi
 
 cp /vagrant/Dockerfile  /home/vagrant/rename.kr.ua/
@@ -31,21 +31,20 @@ docker pull php:7.0-apache
 
 cd /home/vagrant/rename.kr.ua/
 
-docker rm -f rename-db rename.kr.ua
+CMYSQL=rename-db
+CWEB=rename.kr.ua
+
+docker rm -f ${CMYSQL} ${CWEB}
 
 
 docker build -t phpach .
 
-docker run --name rename-db -v /var/lib/mysql:/var/lib/mysql \
+docker run --name ${CMYSQL} -v /var/lib/mysql:/var/lib/mysql \
            -v /vagrant/rmkr.sql:/docker-entrypoint-initdb.d/rmkr.sql:ro \
            --env-file /vagrant/credential -e MYSQL_RANDOM_ROOT_PASSWORD=yes \
            --restart always \
            -d mysql:5.7
 
-docker run -d --restart always --name rename.kr.ua -p 80:80 \
-           --link rename-db:db --env-file /vagrant/credential \
+docker run -d --restart always --name ${CWEB} -p 80:80 \
+           --link ${CMYSQL}:db --env-file /vagrant/credential \
            phpach:latest
-
-docker restart rename-db
-
-docker restart rename.kr.ua
