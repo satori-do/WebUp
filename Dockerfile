@@ -24,6 +24,6 @@ COPY . ./
 
 RUN composer install
 
-COPY cont-conf.sh /cont-conf.sh
-RUN chmod +x /cont-conf.sh
-CMD /cont-conf.sh && apache2-foreground
+COPY container-configurator.sh /container-configurator.sh
+RUN chmod +x /container-configurator.sh
+CMD /container-configurator.sh && apache2-foreground
