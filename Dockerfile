@@ -23,6 +23,14 @@ COPY . ./
 
 RUN composer install
 
-COPY container-configurator.sh /container-configurator.sh
+RUN echo "#!/bin/bash \n\
+set -e \n\
+cp \${CONFIG_FILE}.example \${CONFIG_FILE} \n\
+sed -i \"s/'server' => 'localhost'/'server' => '\${MYSQL_HOSTNAME}'/\" \${CONFIG_FILE} \n\
+sed -i \"s/'username' => 'root'/'username' => '\${MYSQL_USER}'/\" \${CONFIG_FILE} \n\
+sed -i \"s/'password' => '123456'/'password' => '\${MYSQL_PASSWORD}'/\" \${CONFIG_FILE} \n\
+sed -i \"s/'database_name' => 'rename'/'database_name' => '\${MYSQL_DATABASE}'/\" \${CONFIG_FILE} \n\
+" > /container-configurator.sh
+
 RUN chmod +x /container-configurator.sh
 CMD /container-configurator.sh && apache2-foreground
