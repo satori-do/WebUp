@@ -18,8 +18,7 @@ apt-get install -y \
        mc \
        docker-ce
 
-#sudo gpasswd -a vagrant docker
-sudo usermod -aG docker vagrant
+usermod -aG docker vagrant
 
 WORKDIR=/home/vagrant/rename.kr.ua/
 
@@ -27,7 +26,7 @@ if [ ! -e rename.kr.ua ]; then
     git clone https://github.com/Onix-Systems/rename.kr.ua.git
     cp /vagrant/Dockerfile  ${WORKDIR}
     cp /vagrant/rmkr.sql  ${WORKDIR}
-    sudo cp /vagrant/credential  ${WORKDIR}
+    cp /vagrant/credential  ${WORKDIR}
     cd ${WORKDIR}
 else
     cd ${WORKDIR}
@@ -39,21 +38,25 @@ docker pull php:7.0-apache
 
 CMYSQL=rename-db
 CWEB=rename.kr.ua
+CWEBIMG=${CWEB}:latest
+for CONTAINER in ${CWEB} ${CMYSQL}; do
+    if [ ! -z "$(docker ps -q -f name=${CONTAINER})" ]; then
+        docker stop ${CONTAINER}
+        docker rm ${CONTAINER}
+    fi
+done
 
-if [ ! -z "$(docker ps -q -f name=rename-db)" ]; then
-    docker rm -f ${CMYSQL} ${CWEB}
-fi
 if [ -z "$(docker ps -q -f name=rename-db)" ]; then
 
-docker build -t phpach .
+    docker build -t ${CWEBIMG} .
 
-docker run --name ${CMYSQL} -v /var/lib/mysql:/var/lib/mysql \
-           -v ${WORKDIR}/rmkr.sql:/docker-entrypoint-initdb.d/rmkr.sql:ro \
-           --env-file ${WORKDIR}credential -e MYSQL_RANDOM_ROOT_PASSWORD=yes \
-           --restart always \
-           -d mysql:5.7
+    docker run --name ${CMYSQL} -v /var/lib/mysql:/var/lib/mysql \
+               -v ${WORKDIR}/rmkr.sql:/docker-entrypoint-initdb.d/rmkr.sql:ro \
+               --env-file ${WORKDIR}credential -e MYSQL_RANDOM_ROOT_PASSWORD=yes \
+               --restart always \
+               -d mysql:5.7
 
-docker run -d --restart always --name ${CWEB} -p 80:80 \
-           --link ${CMYSQL}:db --env-file ${WORKDIR}credential \
-           phpach:latest
+    docker run -d --restart always --name ${CWEB} -p 80:80 \
+               --link ${CMYSQL}:db --env-file ${WORKDIR}credential \
+               ${CWEBIMG}
 fi
