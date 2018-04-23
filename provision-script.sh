@@ -17,10 +17,10 @@ apt-get install -y \
 sudo usermod -aG docker vagrant
 
 if [ ! -e rename.kr.ua ]; then
-    git clone https://github.com/Onix-Systems/rename.kr.ua.git \
+    git clone https://github.com/Onix-Systems/rename.kr.ua.git && \
     cp /vagrant/Dockerfile  /home/vagrant/rename.kr.ua/ \
     cp /vagrant/rmkr.sql  /home/vagrant/rename.kr.ua/ \
-    cp /vagrant/credential  /home/vagrant/rename.kr.ua/ \
+    cp /vagrant/crdential  /home/vagrant/rename.kr.ua/ && \
     cd /home/vagrant/rename.kr.ua/
 else
     cd /home/vagrant/rename.kr.ua/
