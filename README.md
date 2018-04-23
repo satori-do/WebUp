@@ -9,7 +9,7 @@ Example for familiarizing you with development tools for deploying a web server
 
 ### The resources that were used in the development:
 
-1.  https://www.vagrantup.com/ - official site Vagrant
+1. https://www.vagrantup.com/ - official site Vagrant
 1. https://hub.docker.com/_/mysql/ - official repository MYSQL
 1. https://hub.docker.com/_/php/ - official reopsitory PHP
 1. https://getcomposer.org/ - official documentations Composer for PHP
@@ -24,7 +24,6 @@ Development environment use current folder as source for application.
     .
     ├── Dockerfile
     ├── credential          *
-    ├── provision-script.sh
     ├── rmkr.sql            **
     └── Vagrantfile
 
