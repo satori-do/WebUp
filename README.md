@@ -22,7 +22,6 @@ Development environment use current folder as source for application.
 ### Project structure
 ```
     .
-    ├── cont-conf.sh
     ├── Dockerfile
     ├── credential          *
     ├── provision-script.sh
