@@ -28,7 +28,7 @@ Development environment use current folder as source for application.
     └── Vagrantfile
 
 ```
-`* credential` - contains user data and is filled by request...
+`* credential` - contains user data and is filled by example .env.example
 
 `** table data` - supplied separately
 
