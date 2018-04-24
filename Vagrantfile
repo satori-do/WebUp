@@ -28,7 +28,7 @@ end
   set -e
 
   apt-get update -y
-  apt-get install \
+  apt-get install -y \
     apt-transport-https \
     ca-certificates \
     curl \
@@ -62,8 +62,9 @@ end
 
   docker pull mysql:5.7
   docker pull php:7.0-apache
+  source /vagrant/credential
 
-  CMYSQL=rename-db
+  CMYSQL=${MYSQL_HOSTNAME}
   CWEB=rename.kr.ua
   CWEBIMG=${CWEB}:latest
   for CONTAINER in ${CWEB} ${CMYSQL}; do
@@ -73,7 +74,7 @@ end
       fi
   done
 
-  if [ -z "$(docker ps -q -f name=rename-db)" ]; then
+  if [ -z "$(docker ps -q -f name=${CMYSQL})" ]; then
 
       docker build -t ${CWEBIMG} .
 
@@ -84,7 +85,7 @@ end
                  -d mysql:5.7
 
       docker run -d --restart always --name ${CWEB} -p 80:80 \
-                 --link ${CMYSQL}:db --env-file ${WORKDIR}credential \
+                 --link ${CMYSQL} --env-file ${WORKDIR}credential \
                  ${CWEBIMG}
   fi
 
